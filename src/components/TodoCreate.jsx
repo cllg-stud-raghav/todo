@@ -1,14 +1,15 @@
-import { useState } from "react";
-
-function TodoCreate({createTodo}){
-    const [todoTitle,setTodoTitle]=useState(' ');
-    const handleKeyDown=(e)=>{
-        if(e.key==='Enter'){
+import { useState, useContext } from "react";
+import { TodoContext } from "../TodoContext";
+function TodoCreate() {
+    const {createTodo}=useContext(TodoContext);
+    const [todoTitle, setTodoTitle] = useState(' ');
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
             createTodo(todoTitle);
             setTodoTitle(' ');
         }
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
     }
     return (
@@ -19,9 +20,9 @@ function TodoCreate({createTodo}){
                 value={todoTitle}
                 placeholder="e.g. Playing football"
                 id="todoInput"
-                onChange={e=>{setTodoTitle(e.target.value)}}
+                onChange={e => { setTodoTitle(e.target.value) }}
                 onKeyDown={handleKeyDown}
-             />
+            />
         </form>
     )
 }

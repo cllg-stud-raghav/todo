@@ -1,18 +1,11 @@
-import { useState } from "react";
+import { useContext } from "react";
 import TodoCreate from "./components/TodoCreate";
 import TodoEdit from "./components/TodoEdit";
 import TodoList from "./components/TodoList";
+import { TodoContext } from "./TodoContext";
 
 export default function App() {
-  const [id, setId] = useState(101);
-  const [todoList, setTodoList] = useState([]);
-  const createTodo = (todoTitle) => {
-    setTodoList((prev) => [
-      ...prev,
-      { id: id, title: todoTitle },
-    ]);
-    setId((prev) => prev + 1);
-  };
+  const {todos}=useContext(TodoContext);
   return (
     <>
       <header>
@@ -21,8 +14,8 @@ export default function App() {
       </header>
       <hr></hr>
       <main>
-        {todoList.length !==0 ? <TodoList todoList={todoList} />: null}
-        <TodoCreate createTodo={createTodo} />
+        {todos.length !== 0 ? <TodoList /> : null}
+        <TodoCreate />
       </main>
     </>
   );

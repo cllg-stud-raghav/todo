@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { TodoContext } from "../TodoContext";
 import TodoShow from "./TodoShow";
-function TodoList({todoList}){
-    const renderList=todoList.map(todo=>{
-        return <TodoShow key={todo.id} title={todo.title} />
+function TodoList() {
+    const { todos } = useContext(TodoContext)
+    const renderList = todos.map(todo => {
+        return <TodoShow key={todo.id} id={todo.id} title={todo.title} />
     })
     return (
         <section>

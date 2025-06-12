@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
+import { TodoContext } from "../TodoContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-function TodoShow({ title }) {
+function TodoShow({ id, title }) {
+  const {editTodo,deleteTodo}=useContext(TodoContext);
   const [status, setStatus] = useState(false);
   const handleDoubleClick = () => {
     setStatus((prev) => !prev);
   };
+  const handleDelete = () => {
+    deleteTodo(id)
+  }
+
   return (
     <li
       onDoubleClick={handleDoubleClick}
@@ -15,16 +21,20 @@ function TodoShow({ title }) {
     >
       {title}
       <div className="todo-options">
-        <FontAwesomeIcon
-        icon={faPenToSquare}
-        style={{ color: "f6f5f4" }}
-        className="icon"
-      />
-      <FontAwesomeIcon
-        icon={faTrashCan}
-        style={{ color: "#f6f5f4" }}
-        className="icon"
-      />
+        <div onClick={editTodo}>
+          <FontAwesomeIcon
+            icon={faPenToSquare}
+            style={{ color: "f6f5f4" }}
+            className="icon"
+          />
+        </div>
+        <div onClick={handleDelete}>
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            style={{ color: "#f6f5f4" }}
+            className="icon"
+          />
+        </div>
       </div>
     </li>
   );
