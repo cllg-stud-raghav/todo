@@ -8,11 +8,19 @@ export const TodoProvider = ({ children }) => {
     const createTodo = (todoTitle) => {
         setTodos((prev) => [
             ...prev,
-            { id: id, title: todoTitle },
+            { id: id, title: todoTitle, completed: false },
         ]);
         setId((prev) => prev + 1);
     };
-    const editTodo = () => { }  // will work on soon!!
+    const editTodo = (id, title, completed = false) => {
+        const updateTodo = todos.map(todo => {
+            if (todo.id === id) {
+                return { ...todo, completed, title }
+            }
+            return todo;
+        })
+        setTodos(updateTodo);
+    }  // will work on soon!!
     const deleteTodo = (id) => {
         const updateTodo = todos.filter(todo => (id !== todo.id));
         setTodos(updateTodo);

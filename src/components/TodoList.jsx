@@ -4,7 +4,7 @@ import TodoShow from "./TodoShow";
 function TodoList() {
     const { todos } = useContext(TodoContext)
     const renderList = todos.map(todo => {
-        return <TodoShow key={todo.id} id={todo.id} title={todo.title} />
+        return <TodoShow key={todo.id} todo={todo} id={todo.id} title={todo.title} />
     })
     return (
         <section>
